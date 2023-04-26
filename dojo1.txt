@@ -1,0 +1,65 @@
+// C++ code
+//Juan Pablo Etchart 1B
+
+#define led_green1 13
+#define led_green2 12
+#define led_yellow1 11
+#define led_yellow2 10
+#define led_red1 9
+#define led_red2 8
+
+#define parlante 2
+void setup()
+{
+  pinMode(led_green1, OUTPUT);
+  pinMode(led_green2, OUTPUT);
+  pinMode(led_yellow1, OUTPUT);
+  pinMode(led_yellow2, OUTPUT);
+  pinMode(led_red1, OUTPUT);
+  pinMode(led_red2, OUTPUT);
+  
+ 
+  pinMode(parlante, OUTPUT);
+  
+}
+
+void loop()
+{
+  prenderRojo(led_red1,led_red2);
+  prenderApagar(led_yellow1,led_yellow2,3000);
+  prenderApagar(led_green1,led_green2,5000);
+  prenderApagar(led_yellow1,led_yellow2,3000);
+
+ 
+}
+
+void prenderApagar(int led1, int led2,int tiempo)
+{
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+
+  delay(tiempo);
+ 
+  digitalWrite(led1,LOW);
+  digitalWrite(led2,LOW);
+
+}
+void prenderApagarParlante(int buzzer,int frecuencia,int tiempo,int repeticion)
+{
+  for (int i= 0;i<repeticion;i++)
+  {
+    tone(buzzer,frecuencia);
+    delay(tiempo);
+    noTone(buzzer);
+    delay(tiempo);
+  }
+}
+void prenderRojo(int led1,int led2)
+{
+  digitalWrite(led1,HIGH);
+  digitalWrite(led2,HIGH);
+  prenderApagarParlante(parlante,2000,250,10);
+  digitalWrite(led1,LOW);
+  digitalWrite(led2,LOW);
+  
+}
